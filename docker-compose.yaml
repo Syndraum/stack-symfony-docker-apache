@@ -1,0 +1,36 @@
+version: '3.3'
+services:
+  mysql:
+    image: mysql:8.0
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: photodec
+      MYSQL_USER: photodec
+      MYSQL_PASSWORD: admin
+  pma:
+    image: phpmyadmin
+    restart: on-failure
+    ports:
+      - '8000:80'
+    environment:
+      PMA_HOST: mysql
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    volumes:
+      - './apps/:/usr/src/app'
+    restart: on-failure
+    user: 1000:1000
+  apache:
+    build:
+      context: ./docker/apache/
+      dockerfile: Dockerfile
+    restart: on-failure
+    volumes:
+      - './apps:/var/www/project/public'
+    ports:
+      - '8080:80'
+    depends_on:
+      - php
