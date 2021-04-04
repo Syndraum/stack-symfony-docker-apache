@@ -1,2 +1,3 @@
 apps/
 docker/mysql/*
+docker/._mysql
