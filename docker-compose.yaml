@@ -19,20 +19,9 @@ services:
     build:
       context: .
       dockerfile: docker/php/Dockerfile
-    # volumes:
-    #   - './apps/:/var/www/html'
+    volumes:
+      - './apps/:/var/www/html'
     ports:
       - '80:80'
+      - '443:443'
     restart: on-failure
-    user: 1000:1000
-  # apache:
-  #   build:
-  #     context: ./docker/apache/
-  #     dockerfile: Dockerfile
-  #   restart: on-failure
-  #   volumes:
-  #     - './apps:/var/www/project/public'
-  #   ports:
-  #     - '8080:80'
-  #   depends_on:
-  #     - php
