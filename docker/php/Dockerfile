@@ -1,22 +1,27 @@
 # ./docker/php/Dockerfile
 
-FROM php:7.4-fpm
+FROM php:7.3-apache
 
-RUN apt-get update && \
-	apt-get install -y \
-	libzip-dev
+COPY src/ /var/www/html/
+# ENV PATH_PROJECT /var/www/html
 
-RUN docker-php-ext-install pdo_mysql
+# RUN apt-get update && \
+# 	apt-get install -y \
+# 	libzip-dev
 
-RUN docker-php-ext-install zip
+# RUN docker-php-ext-install pdo_mysql
 
-COPY --from=composer:1 /usr/bin/composer /usr/local/bin/composer
+# RUN docker-php-ext-install zip
 
-WORKDIR /usr/src/app
+# COPY --from=composer:1 /usr/bin/composer /usr/local/bin/composer
 
-COPY --chown=1000:1000 apps /usr/src/app
+# WORKDIR $PATH_PROJECT
 
-RUN PATH=$PATH:/usr/src/app/vendor/bin:bin
+# COPY --chown=1000:1000 apps $PATH_PROJECT
 
-RUN composer install --no-scripts --prefer-dist \
-	&& rm -rf "$(composer config cache-dir)" "$(composer config data-dir)"
+# RUN PATH=$PATH:$PATH_PROJECT/vendor/bin:bin
+
+# RUN composer install --no-scripts --prefer-dist \
+# 	&& rm -rf "$(composer config cache-dir)" "$(composer config data-dir)"
+
+# CMD bash && tail -f /dev/null
