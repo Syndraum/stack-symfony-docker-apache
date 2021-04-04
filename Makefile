@@ -9,3 +9,5 @@ build:
 up:
 	docker-compose up -d --remove-orphans
 
+clean:
+	docker system prune -a
