@@ -8,13 +8,13 @@ build:
 
 up:
 	docker-compose up -d --remove-orphans
-	docker exec fothe_php_1 sh -c 'composer install'
+	docker exec php_symfony sh -c 'composer install'
 
 stop:
-	docker stop fothe_php_1 fothe_pma_1 fothe_mysql_1
+	docker stop php_symfony pma_symfony mysql_symfony
 
 rm: stop
-	docker rm fothe_php_1 fothe_pma_1 fothe_mysql_1
+	docker rm php_symfony pma_symfony mysql_symfony
 
 clean:
 	docker system prune -a

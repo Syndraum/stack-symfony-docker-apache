@@ -1,6 +1,7 @@
 version: '3.3'
 services:
   mysql:
+    container_name : mysql_symfony
     image: mysql:8.0
     restart: on-failure
     environment:
@@ -9,6 +10,7 @@ services:
       MYSQL_USER: photodec
       MYSQL_PASSWORD: admin
   pma:
+    container_name : pma_symfony
     image: phpmyadmin
     restart: on-failure
     ports:
@@ -16,6 +18,7 @@ services:
     environment:
       PMA_HOST: mysql
   php:
+    container_name : php_symfony
     build:
       context: .
       dockerfile: docker/php/Dockerfile
