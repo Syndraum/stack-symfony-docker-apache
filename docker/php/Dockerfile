@@ -19,10 +19,6 @@ COPY --from=composer:1 /usr/bin/composer /usr/local/bin/composer
 
 WORKDIR $PATH_PROJECT
 
-COPY apps $PATH_PROJECT
-
 RUN PATH=$PATH:$PATH_PROJECT/vendor/bin:bin
 
-RUN composer install --no-scripts --prefer-dist \
-	&& rm -rf "$(composer config cache-dir)" "$(composer config data-dir)"
 
