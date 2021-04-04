@@ -1,6 +1,6 @@
 ## Utilisation
 
-Create `apps` and clone your Synfony project in it
+Create `apps` directory and clone your Synfony project in it
 
 Create an `.env` file from `.env.dist` and set vairables you want
 
