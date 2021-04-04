@@ -8,16 +8,16 @@ build:
 
 up:
 	docker-compose up -d --remove-orphans
-	docker exec php_symfony sh -c 'composer install'
+	docker exec php_symfony sh -c 'composer install --no-scripts --prefer-dist && rm -rf "$(composer config cache-dir)" "$(composer config data-dir)"'
 
 stop:
-	docker stop php_symfony pma_symfony mysql_symfony
+	docker-compose stop
 
 rm: stop
-	docker rm php_symfony pma_symfony mysql_symfony
+	docker-compose rm
 
 clean:
-	docker system prune -a
+	docker-compose down -v
 
 re: rm all
 

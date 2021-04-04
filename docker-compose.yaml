@@ -4,6 +4,8 @@ services:
     container_name : mysql_symfony
     image: mysql:8.0
     restart: on-failure
+    volumes:
+      - './docker/mysql/:/var/lib/mysql'
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: photodec
@@ -16,7 +18,9 @@ services:
     ports:
       - '8000:80'
     environment:
-      PMA_HOST: mysql
+      PMA_HOST: mysql_symfony
+    depends_on:
+      - mysql
   php:
     container_name : php_symfony
     build:
@@ -28,3 +32,5 @@ services:
       - '80:80'
       - '443:443'
     restart: on-failure
+    depends_on:
+      - mysql
