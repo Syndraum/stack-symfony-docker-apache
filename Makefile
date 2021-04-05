@@ -9,6 +9,7 @@ build:
 up:
 	docker-compose up -d --remove-orphans
 	docker exec php_symfony sh -c 'chown -R 33:33 ./ && composer install --no-scripts --prefer-dist && rm -rf "$(composer config cache-dir)" "$(composer config data-dir)"'
+	sudo chown -R $$(whoami):$$(whoami) ./apps
 
 stop:
 	docker-compose stop
@@ -16,8 +17,8 @@ stop:
 rm: stop
 	docker-compose rm
 
-db_reset:
-	sudo rm -rf ./docker/mysql/*
+# db_reset:
+# 	sudo rm -rf ./docker/mysql/*
 
 clean:
 	docker-compose down
