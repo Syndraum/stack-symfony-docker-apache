@@ -8,8 +8,11 @@ build:
 
 up:
 	docker-compose up -d --remove-orphans
-	docker exec php_symfony sh -c 'chown -R 33:33 ./ && composer install --no-scripts --prefer-dist && rm -rf "$(composer config cache-dir)" "$(composer config data-dir)"'
-	sudo chown -R $$(whoami):$$(whoami) ./apps
+	docker exec php_symfony sh -c 'mkdir -p var && chown -R 33:33 ./var && composer install --no-scripts --prefer-dist && rm -rf "$(composer config cache-dir)" "$(composer config data-dir)"'
+# sudo chown -R $$(whoami):$$(whoami) ./apps
+
+exec:
+	docker exec -ti $(c)_symfony bash
 
 stop:
 	docker-compose stop
@@ -28,4 +31,4 @@ fclean:
 
 re: rm all
 
-.PHONY: all build up stop rm clean fclean re
+.PHONY: all build up exec stop rm clean fclean re
