@@ -9,6 +9,8 @@ RUN apt-get update && \
 	apt-get install -y \
 	libzip-dev libpng-dev libjpeg-dev zlib1g-dev libicu-dev g++ git vim
 
+RUN apt-get install nodejs npm && npm install -g yarn
+
 # Extension
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install zip 

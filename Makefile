@@ -9,6 +9,7 @@ build:
 up:
 	docker-compose up -d --remove-orphans
 	docker exec php_symfony sh -c 'mkdir -p var && chown -R 33:33 ./var && composer install --no-scripts --prefer-dist && rm -rf "$(composer config cache-dir)" "$(composer config data-dir)"'
+	docker exec php_symfony sh -c 'yarn install'
 # sudo chown -R $$(whoami):$$(whoami) ./apps
 
 exec:
