@@ -9,7 +9,10 @@ RUN apt-get update && \
 	apt-get install -y \
 	libzip-dev libpng-dev libjpeg-dev zlib1g-dev libicu-dev g++ git vim
 
-RUN apt-get install nodejs npm && npm install -g yarn
+#nodejs npm yarn
+RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - && \
+	apt-get install -y nodejs && \
+	npm install -g yarn
 
 # Extension
 RUN docker-php-ext-install pdo_mysql
