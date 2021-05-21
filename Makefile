@@ -36,4 +36,7 @@ re: rm all
 yarn:
 	docker exec php_symfony sh -c 'yarn install'
 
+migration:
+	docker exec php_symfony sh -c 'php bin/console doctrine:migration:migrate'
+
 .PHONY: all build up exec stop rm clean fclean re
